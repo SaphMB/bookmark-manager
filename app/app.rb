@@ -6,6 +6,22 @@ require 'sinatra/base'
 
 class BookmarkManager < Sinatra::Base
 
+  helpers do
+
+    def create_new_tags(tags, link)
+      tags.each do |tag|
+        associate_tag =
+        if Tag.all(:name => tag).empty?
+          Tag.create(name: tag)
+        else
+          Tag.first(:name => tag)
+        end
+        LinkTag.create(:link => link, :tag => associate_tag)
+      end
+    end
+
+  end
+
   get '/links' do
     @links = Link.all
     erb :'links/index'
@@ -16,9 +32,11 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/links' do
-    tag = Tag.create(name: params[:tag])
     link = Link.create(url: params[:url], title: params[:title])
-    LinkTag.create(:link => link, :tag => tag)
+    create_new_tags(params[:tags].split, link)
+    # tag = Tag.create(name: params[:tags])
+    #
+    # LinkTag.create(:link => link, :tag => tag)
     redirect '/links'
   end
 
