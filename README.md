@@ -36,4 +36,8 @@ I would like to remove it from my list of bookmarks
 * $ createdb bookmark_manager_test
 * $ createdb bookmark_manager_development
 
+## To access online
+
+Visit https://fierce-fjord-38847.herokuapp.com/
+
 ## Running tests
