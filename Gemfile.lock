@@ -81,6 +81,7 @@ GEM
       rack
     rack-test (0.7.0)
       rack (>= 1.0, < 3)
+    rake (12.0.0)
     rspec (3.6.0)
       rspec-core (~> 3.6.0)
       rspec-expectations (~> 3.6.0)
@@ -115,6 +116,7 @@ DEPENDENCIES
   dm-migrations
   dm-postgres-adapter
   pg
+  rake
   rspec
   sinatra
 
@@ -122,4 +124,4 @@ RUBY VERSION
    ruby 2.4.0p0
 
 BUNDLED WITH
-   1.15.2
+   1.15.3
