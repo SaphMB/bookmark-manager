@@ -31,4 +31,9 @@ I would like to remove it from my list of bookmarks
 
 ## Getting started
 
+* Clone the repo
+* Bundle install
+* $ createdb bookmark_manager_test
+* $ createdb bookmark_manager_development
+
 ## Running tests

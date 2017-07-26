@@ -2,7 +2,6 @@ ENV['RACK_ENV'] = 'test'
 
 require File.join(File.dirname(__FILE__), '../app/', 'app.rb')
 
-
 require './app/models/link'
 require 'capybara'
 require 'capybara/rspec'
@@ -11,8 +10,11 @@ require 'rspec'
 
 Capybara.app = BookmarkManager
 
-
 RSpec.configure do |config|
+
+  DataMapper.setup(:default, 'postgres://localhost/bookmark_manager_test')
+  DataMapper.finalize
+  DataMapper.auto_upgrade!
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
@@ -23,14 +25,8 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :feature) do
-    # :rack_test driver's Rack app under test shares database connection
-    # with the specs, so continue to use transaction strategy for speed.
-    p driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
-
+    driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
     if !driver_shares_db_connection_with_specs
-      # Driver is probably for an external browser with an app
-      # under test that does *not* share a database connection with the
-      # specs, so use truncation strategy.
       DatabaseCleaner.strategy = :truncation
     end
   end
@@ -42,7 +38,6 @@ RSpec.configure do |config|
   config.append_after(:each) do
     DatabaseCleaner.clean
   end
-
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
