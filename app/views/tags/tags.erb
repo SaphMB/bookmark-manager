@@ -1,0 +1,7 @@
+<ul>
+<% @tag.links.each do |link| %>
+  <li>
+    <%= link.title %> (<%= link.url %>)
+  </li>
+<% end %>
+</ul>
