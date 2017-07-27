@@ -1,10 +1,19 @@
-<ul id="links">
-<% @links.each do |link| %>
-  <li>
-    <%= link.title %> (<%= link.url %>). Tags:
-    <% link.tags.each do |tag| %>
-    <%= tag.name %>, 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bookmark Manager xtreme</title>
+  </head>
+  <body>
+    <!-- <h1>Welcome, <%= @user.email if @user %> -->
+    <ul>
+    <% @links.each do |link| %>
+      <li>
+        <%= link.title %> (<%= link.url %>). Tags:
+        <% link.tags.each do |tag| %>
+        <%= tag.name %>,
+        <% end %>
+      </li>
     <% end %>
-  </li>
-<% end %>
-</ul>
+    </ul>
+  </body>
+</html>
